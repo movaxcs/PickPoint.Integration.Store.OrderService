@@ -28,7 +28,7 @@ namespace PickPoint.Integration.Store.OrderService.Dto
         {
             get
             {
-                if (Products == null || Products.Count() == 0 || Products.Count() > 10)
+                if (Cost <= 0 || Products == null || Products.Count() == 0 || Products.Count() > 10)
                     return false;
 
                 return true;

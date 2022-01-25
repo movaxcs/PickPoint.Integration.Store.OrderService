@@ -46,14 +46,29 @@ namespace PickPoint.Integration.Store.OrderService.Controllers
 
         // PUT: api/Orders/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(long id, OrderDto orderDto)
+        public async Task<IActionResult> PutOrder(long id, [FromQuery] OrderDto orderDto)
         {
-            if (id != orderDto.Id)
+            var order = await context.Orders.FindAsync(id);
+
+            if (order == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            context.Entry(orderDto).State = EntityState.Modified;
+            order.Cost = orderDto.Cost;
+            order.PostamatId = orderDto.PostamatId;
+            order.RecipientId = orderDto.RecipientId;
+            order.Products = new List<Product>();
+
+            foreach (var productId in orderDto.Products)
+            {
+                var product = await context.Products.FindAsync(productId);
+
+                if (product == null)
+                    return BadRequest();
+
+                order.Products.Add(product);
+            }
 
             try
             {
@@ -78,12 +93,31 @@ namespace PickPoint.Integration.Store.OrderService.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder([FromQuery] OrderDto order)
         {
-            context.Orders.Add(
-                new Order { 
-                    Cost = order.Cost, 
-                    PostamatId = order.PostamatId, 
-                    RecipientId = order.RecipientId});
-            
+            if (!order.IsValid)
+            {
+                return BadRequest();
+            }
+
+            Order newOrder = new Order
+            {
+                Cost = order.Cost,
+                PostamatId = order.PostamatId,
+                RecipientId = order.RecipientId, 
+                Products = new List<Product>(),
+            };
+
+            foreach (var productId in order.Products)
+            {
+                var product = await context.Products.FindAsync(productId);
+
+                if (product == null)
+                    return BadRequest();
+
+                newOrder.Products.Add(product);
+            }
+
+            context.Orders.Add(newOrder);
+
             await context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetOrder), new { id = order.Id }, order);
