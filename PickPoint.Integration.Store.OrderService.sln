@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickPoint.Integration.Store.OrderService", "PickPoint.Integration.Store.OrderService\PickPoint.Integration.Store.OrderService.csproj", "{87880B36-05D4-41B2-8B46-B413CD00ABEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87880B36-05D4-41B2-8B46-B413CD00ABEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87880B36-05D4-41B2-8B46-B413CD00ABEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87880B36-05D4-41B2-8B46-B413CD00ABEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87880B36-05D4-41B2-8B46-B413CD00ABEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FB214DB-E274-4692-9A20-81AFD4643455}
+	EndGlobalSection
+EndGlobal
