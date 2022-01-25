@@ -11,9 +11,10 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// data generation
 using (var scope = app.Services.CreateScope())
 {
-    DataGenerator.Initialize(scope.ServiceProvider); // data generation
+    DataGenerator.Initialize(scope.ServiceProvider);
 }
 
 if (app.Environment.IsDevelopment())
